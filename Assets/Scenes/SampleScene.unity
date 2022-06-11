@@ -152,7 +152,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyToSpawn:
   - {fileID: 5399588846149006207, guid: d3359e184e320cb41b2131365010635f, type: 3}
-  - {fileID: 3312253635375073445, guid: 0336a8b5b6beb0c4da429791f40b76fe, type: 3}
   - {fileID: 5399588846149006207, guid: d3359e184e320cb41b2131365010635f, type: 3}
   pool: []
   enemySpawnPoint: {x: 0, y: 0}
@@ -451,4 +450,4 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
