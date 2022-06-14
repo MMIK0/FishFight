@@ -10,6 +10,15 @@ public class EnemyMovement : MonoBehaviour
     public bool ReverseArrivalMovementDir;
     private Vector3 fixedrotationLocalPos= Vector3.zero;
 
+    public Vector3 target;
+    public enemyType typeOfEnemy;
+
+    public enum enemyType
+    {
+        red,
+        blue,
+        white
+    }
 
     void FixedUpdate()
     {
