@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     public float speed;
     Vector2 movement;
     public Rigidbody2D playerRB;
+    public Transform rotatingDiscL, rotatingDiscR;
 
     public void Awake()
     {

@@ -97,7 +97,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyMoveSpeed: 5
+  distanceToKeepFromPlayer: 3
   enemyDamage: 0
+  movementOnArrival: 2
+  ReverseArrivalMovementDir: 0
   target: {x: 0, y: 0, z: 0}
   typeOfEnemy: 0
 --- !u!61 &5399588846149006195
@@ -124,7 +127,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.2, y: 0.2}
   m_EdgeRadius: 0
 --- !u!50 &5399588846149006194
 Rigidbody2D:

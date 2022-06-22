@@ -37,7 +37,7 @@ public class EnemySpawner : MonoBehaviour
         foreach (GameObject enemy in enemyToSpawn)
         {
             GameObject enemyToAdd;
-            enemyToAdd = enemyToSpawn[Random.Range(1, enemyToSpawn.Count)];
+            enemyToAdd = enemyToSpawn[Random.Range(0, enemyToSpawn.Count)];
             enemy.SetActive(false);
             pool.Add(enemyToAdd);
         }
