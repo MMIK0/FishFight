@@ -53,10 +53,10 @@ public class EnemyMovement : MonoBehaviour
 
     void ChasingCircle()
     {
-        Vector3 vec = Vector3.Cross(transform.position - Player.instance.transform.position, Vector3.forward);
+        Vector3 vec = Vector3.Normalize(Vector3.Cross(Player.instance.transform.position- transform.position, Vector3.forward));
         if (ReverseArrivalMovementDir)
             vec = -vec;
-        transform.position = Vector2.MoveTowards(transform.position, transform.position + vec, enemyMoveSpeed * Time.fixedDeltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, Player.instance.transform.position +vec*distanceToKeepFromPlayer*10, enemyMoveSpeed * Time.fixedDeltaTime);
     }
     void FixedCircle()
     {

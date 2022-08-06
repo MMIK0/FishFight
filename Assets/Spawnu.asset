@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cba954b144dbba44bb0ff4dbd4a7c5f7, type: 3}
+  m_Name: Spawnu
+  m_EditorClassIdentifier: 
+  spawns:
+  - spawnTime: 0
+    thingsToSpawn:
+    - {fileID: 5399588846149006207, guid: 34f4ea516b3dc0641a9b6513bd60707a, type: 3}
+  - spawnTime: 30
+    thingsToSpawn:
+    - {fileID: 5399588846149006207, guid: d3359e184e320cb41b2131365010635f, type: 3}
+    - {fileID: 3312253635375073445, guid: 0336a8b5b6beb0c4da429791f40b76fe, type: 3}
+    - {fileID: 5399588846149006207, guid: 34f4ea516b3dc0641a9b6513bd60707a, type: 3}
+  currentSpawnlist:
+    spawnTime: 0
+    thingsToSpawn:
+    - {fileID: 5399588846149006207, guid: 34f4ea516b3dc0641a9b6513bd60707a, type: 3}

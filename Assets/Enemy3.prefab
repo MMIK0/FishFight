@@ -13,13 +13,14 @@ GameObject:
   - component: {fileID: 5399588846149006206}
   - component: {fileID: 5399588846149006195}
   - component: {fileID: 5399588846149006194}
+  - component: {fileID: 2398913725688943167}
   m_Layer: 0
   m_Name: Enemy3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5399588846149006192
 Transform:
   m_ObjectHideFlags: 0
@@ -96,11 +97,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29199bcfb8d683746ad6e2cf392c95f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyMoveSpeed: 2
+  enemyMoveSpeed: 0.5
   distanceToKeepFromPlayer: 0.2
   enemyDamage: 0
   movementOnArrival: 0
   ReverseArrivalMovementDir: 0
+  target: {x: 0, y: 0, z: 0}
+  typeOfEnemy: 0
 --- !u!61 &5399588846149006195
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -125,7 +128,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.2, y: 0.2}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!50 &5399588846149006194
 Rigidbody2D:
@@ -146,5 +149,18 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &2398913725688943167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5399588846149006207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f86e8b93022a074d8c9b47d44bc1ed7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitPoints: 10
