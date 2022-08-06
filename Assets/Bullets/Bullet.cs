@@ -19,4 +19,15 @@ public class Bullet : PooledBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
     }
+
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        gameObject.SetActive(false);
+    }
+
+    public void OnBecameInvisible()
+    {
+        gameObject.SetActive(false);
+    }
+
 }

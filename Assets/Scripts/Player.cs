@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     Vector2 movement;
     public Rigidbody2D playerRB;
     public Transform rotatingDiscL, rotatingDiscR;
+    public GameObject upgradeMenu;
 
     public void Awake()
     {
@@ -22,7 +23,6 @@ public class Player : MonoBehaviour
     {
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
-
     }
     void FixedUpdate()
     {

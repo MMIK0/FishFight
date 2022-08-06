@@ -10,6 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aa2f87380c053254081d5150bf173129, type: 3}
-  m_Name: New Bullet Handler
+  m_Name: Bullet Handler
   m_EditorClassIdentifier: 
-  BulletList: []
+  BulletList:
+  - bulletPref: {fileID: 8496826442753165865, guid: d38bafd2b84ca8646bd149b7e177d0a8,
+      type: 3}
+  - bulletPref: {fileID: 8496826442753165865, guid: ac457298311b21a42a41eefe5cf3edce,
+      type: 3}
+  - bulletPref: {fileID: 8496826442753165865, guid: e97f857631488664583c33e35a3317a7,
+      type: 3}

@@ -97,7 +97,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 18922
   poolGrowthAmount: 1
-  fireRate: 0.1
+  fireRate: 1
   speed: 10
 --- !u!50 &5471078071468454191
 Rigidbody2D:

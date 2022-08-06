@@ -4,13 +4,12 @@ using UnityEngine;
 [CreateAssetMenu]
 public class BulletHandler : ScriptableObject
 {
-    public Dictionary<string, BulletType> BulletList = new Dictionary<string, BulletType>();
+    public List<BulletType> BulletList = new List<BulletType>();
 
     [System.Serializable]
     public class BulletType
     {
         public GameObject bulletPref;
-        public float fireRate;
     }
 
 }
