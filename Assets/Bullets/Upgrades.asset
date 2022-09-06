@@ -13,13 +13,23 @@ MonoBehaviour:
   m_Name: Upgrades
   m_EditorClassIdentifier: 
   upgrades:
-  - name: 
-    description: 
+  - name: Heavy Bullet
+    description: Increase Damage
     icon: {fileID: 0}
     upgradeType: 0
     statAmount: 0
-  - name: 
-    description: 
+  - name: Accelerator
+    description: Makes bullet go faster :)
     icon: {fileID: 0}
     upgradeType: 1
+    statAmount: 0
+  - name: F.A.S.T System
+    description: Increases the firerate
+    icon: {fileID: 0}
+    upgradeType: 2
+    statAmount: 0
+  - name: Barrel
+    description: Unlock a new barrel
+    icon: {fileID: 0}
+    upgradeType: 3
     statAmount: 0
