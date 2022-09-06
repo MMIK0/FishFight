@@ -27,6 +27,12 @@ public class Bullet : PooledBehaviour
 
     public void OnBecameInvisible()
     {
+        if(gameObject.activeInHierarchy)
+            StartCoroutine("LastStand");
+    }
+    IEnumerator LastStand()
+    {
+        yield return new WaitForSeconds(1f);
         gameObject.SetActive(false);
     }
 

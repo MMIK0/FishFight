@@ -9,6 +9,9 @@ public class BorderSpawner : MonoBehaviour
     public int targetEnemyAmount;
     private int currentEnemyAmount;
     private float elapsedTime=0;
+    bool iniSpawn =false;
+    public bool debugLines = false;
+    private List<GameObject> enemies = new List<GameObject>();
 
     public void Awake()
     {
@@ -17,17 +20,100 @@ public class BorderSpawner : MonoBehaviour
         else if (Instance != this)
             Destroy(gameObject);
         DontDestroyOnLoad(gameObject);
+        bool iniSpawn = false;
     }
 
+    private void Start()
+    {
+        if (enemies.Count < targetEnemyAmount)
+            RandomSpawn();
+        iniSpawn = true;
+    }
     private void Update()
     {
-        if (currentEnemyAmount < targetEnemyAmount)
-            RandomSpawn();
+        if(!iniSpawn)
+            return;
+        if (enemies.Count < targetEnemyAmount)
+            SurroundSpawn();
         elapsedTime += Time.deltaTime;
+        if(debugLines)
+            DrawLines();
     }
-    public void EnemyDead()
+    public void EnemyDead(GameObject g)
     {
-        currentEnemyAmount -= 1;
+        if (enemies.Contains(g))
+            enemies.Remove(g);
+    }
+
+    private void DrawLines()
+    {
+        Vector3 spawnDirFromPlayer = Vector3.zero;
+        foreach (GameObject gg in enemies)
+        {
+            spawnDirFromPlayer += (Camera.main.WorldToScreenPoint(gg.transform.position) - Camera.main.WorldToScreenPoint(Player.instance.transform.position)).normalized;
+            Debug.DrawLine(Camera.main.WorldToScreenPoint(gg.transform.position), Camera.main.WorldToScreenPoint(Player.instance.transform.position), Color.blue);
+        }
+        Debug.DrawRay(Camera.main.WorldToScreenPoint(Player.instance.transform.position), -spawnDirFromPlayer*1000, Color.red);
+
+    }
+
+    public void SurroundSpawn()
+    {
+        float h = Screen.height;
+        float w = Screen.width;
+        Vector3 SpiceOfRandom = new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f));
+        Vector3 spawnDirFromPlayer = Vector3.zero;
+        Vector3 a = Camera.main.WorldToScreenPoint(Player.instance.transform.position);
+        foreach (GameObject gg in enemies)
+            spawnDirFromPlayer += (Camera.main.WorldToScreenPoint(gg.transform.position) - a).normalized;
+
+        Vector3 temp = -spawnDirFromPlayer.normalized;
+        Debug.Log("Dir "+temp);
+        temp += SpiceOfRandom;
+        Debug.Log("Dir with spice" + temp);
+        Vector3 spawnCords=Vector3.zero;
+        if(Mathf.Abs(temp.x)>= Mathf.Abs(temp.y))
+        {
+            if (temp.x > 0)
+                spawnCords.x = w;
+            else
+                spawnCords.x = 0;
+            if (temp.y > 0)
+            {
+                spawnCords.y = (h - a.y) * (Mathf.Abs(temp.y) / Mathf.Abs(temp.x)) + a.y;
+            }
+            else
+            {
+                spawnCords.y = a.y -a.y * (Mathf.Abs(temp.y) / Mathf.Abs(temp.x));
+            }
+        }
+        else
+        {
+            if (temp.y > 0)
+                spawnCords.y = h;
+            else
+                spawnCords.y = 0;
+            if (temp.x > 0)
+            {
+                spawnCords.x = (w - a.x) * (Mathf.Abs(temp.x) / Mathf.Abs(temp.y)) + a.x;
+            }
+            else
+            {
+                spawnCords.x = a.x - a.x * (Mathf.Abs(temp.x) / Mathf.Abs(temp.y));
+            }
+        }
+
+        Debug.Log(spawnCords);
+        spawnDirFromPlayer.z = 0;
+        if(spawnDirFromPlayer== Vector3.zero)
+        {
+            RandomSpawn();
+            return;
+        }
+        
+        Vector3 spawnpoint = Camera.main.ScreenToWorldPoint(spawnCords);
+        var g = Instantiate(spawnList.GetRandomSpawn(), spawnpoint, Quaternion.identity);
+        enemies.Add(g);
     }
     public void RandomSpawn()
     {
@@ -50,8 +136,8 @@ public class BorderSpawner : MonoBehaviour
         else
             spawnpoint = Camera.main.ScreenToWorldPoint(new Vector3(Random.Range(0.01f, 1) * w,b, 0));
         spawnList.SetCurrentSpawn(spawnList.GetSpawnList(elapsedTime));
-        Instantiate(spawnList.GetRandomSpawn(),spawnpoint,Quaternion.identity);
-        currentEnemyAmount += 1;
+        var g =Instantiate(spawnList.GetRandomSpawn(),spawnpoint,Quaternion.identity);
+        enemies.Add(g);
     }
 
 }

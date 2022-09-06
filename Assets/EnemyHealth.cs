@@ -15,11 +15,10 @@ public class EnemyHealth : MonoBehaviour
         currentHp -= 1;
         if (currentHp <= 0)
             gameObject.SetActive(false);
-        Debug.Log("ouch");
     }
     private void OnDisable()
     {
-        BorderSpawner.Instance.EnemyDead();
+        BorderSpawner.Instance.EnemyDead(gameObject);
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {

@@ -71,6 +71,11 @@ public class EnemyMovement : MonoBehaviour
             transform.localPosition = fixedrotationLocalPos;
         transform.rotation = Quaternion.Euler(Vector3.zero);
     }
+    public void OnBecameInvisible()
+    {
+        if (gameObject.activeInHierarchy)
+            StartCoroutine(GeneralCorutines.Instance.LastStand(gameObject,0.3f));
+    }
 
     public enum MovementOnArrival
     {
