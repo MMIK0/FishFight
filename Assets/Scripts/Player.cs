@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     Vector2 movement;
     public Rigidbody2D playerRB;
     public Transform rotatingDiscL, rotatingDiscR;
-    public GameObject upgradeMenu;
+    public UpgradeMenu upgradeMenu;
 
     public void Awake()
     {

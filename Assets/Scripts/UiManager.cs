@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class UiManager : MonoBehaviour
 {
     public static UiManager instance;
+    public ButtonEvent OnButtonPress;
 
     public void Awake()
     {
@@ -14,15 +16,27 @@ public class UiManager : MonoBehaviour
             Destroy(this);
     }
 
+    public void ActivateButton(int buttonId)
+    {
+        OnButtonPress.Invoke(buttonId);
+    }
+
+    public void ActivateNextBarrel(int barrelId)
+    {
+        Player.instance.upgradeMenu.ActivateNextBarrel(barrelId);
+    }
+
     public void OpenUpgradeMenu()
     {
-        Player.instance.upgradeMenu.SetActive(true);
+        Player.instance.upgradeMenu.gameObject.SetActive(true);
         Time.timeScale = 0;
     }
 
     public void CloseUpgradeMenu()
     {
-        Player.instance.upgradeMenu.SetActive(false);
+        Player.instance.upgradeMenu.gameObject.SetActive(false);
         Time.timeScale = 1;
     }
 }
+[System.Serializable]
+public class ButtonEvent : UnityEvent<int> { }

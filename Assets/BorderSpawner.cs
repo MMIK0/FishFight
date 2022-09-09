@@ -68,9 +68,9 @@ public class BorderSpawner : MonoBehaviour
             spawnDirFromPlayer += (Camera.main.WorldToScreenPoint(gg.transform.position) - a).normalized;
 
         Vector3 temp = -spawnDirFromPlayer.normalized;
-        Debug.Log("Dir "+temp);
+        //Debug.Log("Dir "+temp);
         temp += SpiceOfRandom;
-        Debug.Log("Dir with spice" + temp);
+        //Debug.Log("Dir with spice" + temp);
         Vector3 spawnCords=Vector3.zero;
         if(Mathf.Abs(temp.x)>= Mathf.Abs(temp.y))
         {
@@ -103,7 +103,7 @@ public class BorderSpawner : MonoBehaviour
             }
         }
 
-        Debug.Log(spawnCords);
+        //Debug.Log(spawnCords);
         spawnDirFromPlayer.z = 0;
         if(spawnDirFromPlayer== Vector3.zero)
         {
