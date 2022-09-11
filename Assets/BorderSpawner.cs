@@ -105,7 +105,6 @@ public class BorderSpawner : MonoBehaviour
                 spawnCords.x = a.x - a.x * (Mathf.Abs(temp.x) / Mathf.Abs(temp.y));
             }
         }
-        
         spawnDirFromPlayer.z = 0;
         if(spawnDirFromPlayer== Vector3.zero)
         {
