@@ -14,14 +14,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawns:
   - spawnTime: 0
+    waveIntensity: 10
     thingsToSpawn:
-    - {fileID: 5399588846149006207, guid: 34f4ea516b3dc0641a9b6513bd60707a, type: 3}
-  - spawnTime: 30
+    - weight: 1
+      thingToSpawn: {fileID: 5399588846149006207, guid: 34f4ea516b3dc0641a9b6513bd60707a,
+        type: 3}
+  - spawnTime: 5
+    waveIntensity: 15
     thingsToSpawn:
-    - {fileID: 5399588846149006207, guid: d3359e184e320cb41b2131365010635f, type: 3}
-    - {fileID: 3312253635375073445, guid: 0336a8b5b6beb0c4da429791f40b76fe, type: 3}
-    - {fileID: 5399588846149006207, guid: 34f4ea516b3dc0641a9b6513bd60707a, type: 3}
+    - weight: 5
+      thingToSpawn: {fileID: 5399588846149006207, guid: 34f4ea516b3dc0641a9b6513bd60707a,
+        type: 3}
+    - weight: 3
+      thingToSpawn: {fileID: 3312253635375073445, guid: 0336a8b5b6beb0c4da429791f40b76fe,
+        type: 3}
+    - weight: 10
+      thingToSpawn: {fileID: 5399588846149006207, guid: d3359e184e320cb41b2131365010635f,
+        type: 3}
   currentSpawnlist:
-    spawnTime: 0
+    spawnTime: 5
+    waveIntensity: 30
     thingsToSpawn:
-    - {fileID: 5399588846149006207, guid: 34f4ea516b3dc0641a9b6513bd60707a, type: 3}
+    - weight: 1
+      thingToSpawn: {fileID: 5399588846149006207, guid: 34f4ea516b3dc0641a9b6513bd60707a,
+        type: 3}
+    - weight: 3
+      thingToSpawn: {fileID: 3312253635375073445, guid: 0336a8b5b6beb0c4da429791f40b76fe,
+        type: 3}
+    - weight: 10
+      thingToSpawn: {fileID: 5399588846149006207, guid: d3359e184e320cb41b2131365010635f,
+        type: 3}

@@ -11,7 +11,8 @@ public class BorderSpawner : MonoBehaviour
     private float elapsedTime=0;
     bool iniSpawn =false;
     public bool debugLines = false;
-    private List<GameObject> enemies = new List<GameObject>();
+    float currentIntesity;
+    private Dictionary<GameObject,float> enemies = new Dictionary<GameObject, float>();
 
     public void Awake()
     {
@@ -25,7 +26,7 @@ public class BorderSpawner : MonoBehaviour
 
     private void Start()
     {
-        if (enemies.Count < targetEnemyAmount)
+        if (currentIntesity < spawnList.currentSpawnlist.waveIntensity)
             RandomSpawn();
         iniSpawn = true;
     }
@@ -33,7 +34,7 @@ public class BorderSpawner : MonoBehaviour
     {
         if(!iniSpawn)
             return;
-        if (enemies.Count < targetEnemyAmount)
+        if (currentIntesity < spawnList.currentSpawnlist.waveIntensity)
             SurroundSpawn();
         elapsedTime += Time.deltaTime;
         if(debugLines)
@@ -41,14 +42,17 @@ public class BorderSpawner : MonoBehaviour
     }
     public void EnemyDead(GameObject g)
     {
-        if (enemies.Contains(g))
+        if (enemies.ContainsKey(g))
+        {
+            currentIntesity -= enemies[g];
             enemies.Remove(g);
+        }
     }
 
     private void DrawLines()
     {
         Vector3 spawnDirFromPlayer = Vector3.zero;
-        foreach (GameObject gg in enemies)
+        foreach (GameObject gg in enemies.Keys)
         {
             spawnDirFromPlayer += (Camera.main.WorldToScreenPoint(gg.transform.position) - Camera.main.WorldToScreenPoint(Player.instance.transform.position)).normalized;
             Debug.DrawLine(Camera.main.WorldToScreenPoint(gg.transform.position), Camera.main.WorldToScreenPoint(Player.instance.transform.position), Color.blue);
@@ -64,13 +68,12 @@ public class BorderSpawner : MonoBehaviour
         Vector3 SpiceOfRandom = new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f));
         Vector3 spawnDirFromPlayer = Vector3.zero;
         Vector3 a = Camera.main.WorldToScreenPoint(Player.instance.transform.position);
-        foreach (GameObject gg in enemies)
+        foreach (GameObject gg in enemies.Keys)
             spawnDirFromPlayer += (Camera.main.WorldToScreenPoint(gg.transform.position) - a).normalized;
 
         Vector3 temp = -spawnDirFromPlayer.normalized;
-        Debug.Log("Dir "+temp);
+
         temp += SpiceOfRandom;
-        Debug.Log("Dir with spice" + temp);
         Vector3 spawnCords=Vector3.zero;
         if(Mathf.Abs(temp.x)>= Mathf.Abs(temp.y))
         {
@@ -102,18 +105,19 @@ public class BorderSpawner : MonoBehaviour
                 spawnCords.x = a.x - a.x * (Mathf.Abs(temp.x) / Mathf.Abs(temp.y));
             }
         }
-
-        Debug.Log(spawnCords);
+        
         spawnDirFromPlayer.z = 0;
         if(spawnDirFromPlayer== Vector3.zero)
         {
             RandomSpawn();
             return;
         }
-        
+        spawnList.SetCurrentSpawn(spawnList.GetSpawnList(elapsedTime));
         Vector3 spawnpoint = Camera.main.ScreenToWorldPoint(spawnCords);
-        var g = Instantiate(spawnList.GetRandomSpawn(), spawnpoint, Quaternion.identity);
-        enemies.Add(g);
+        var g = spawnList.GetWeightedSpawn(spawnList.currentSpawnlist.waveIntensity - currentIntesity);
+        var u = Instantiate(g.thingToSpawn, spawnpoint, Quaternion.identity);
+        enemies.Add(u,g.weight);
+        currentIntesity += g.weight;
     }
     public void RandomSpawn()
     {
@@ -136,8 +140,10 @@ public class BorderSpawner : MonoBehaviour
         else
             spawnpoint = Camera.main.ScreenToWorldPoint(new Vector3(Random.Range(0.01f, 1) * w,b, 0));
         spawnList.SetCurrentSpawn(spawnList.GetSpawnList(elapsedTime));
-        var g =Instantiate(spawnList.GetRandomSpawn(),spawnpoint,Quaternion.identity);
-        enemies.Add(g);
+        var g = spawnList.GetRandomSpawn();
+        var u = Instantiate(g.thingToSpawn, spawnpoint, Quaternion.identity);
+        enemies.Add(u, g.weight);
+        currentIntesity += g.weight;
     }
 
 }
